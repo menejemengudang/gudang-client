@@ -11,6 +11,10 @@ import Login from './views/login'
 import Stock from './views/stock'
 import addProduct from './views/addProduct'
 import edit from './views/edit'
+import pengirimanList from './views/pengirimanList'
+import addPengiriman from './views/addPengiriman'
+import editPengiriman from './views/editPeniriman'
+
 Vue.use(Router);
 
 export default new Router({
@@ -42,15 +46,29 @@ export default new Router({
       path: '/stock',
       name: 'Stock',
       component: Stock
+    }, {
+      path: '/pengiriman',
+      name: 'pengiriman',
+      component: pengirimanList
     },
     {
       path: '/addProduct',
       name: 'addProduct',
       component: addProduct
     }, {
+      path: '/addPengiriman',
+      name: 'addPengiriman',
+      component: addPengiriman
+    },
+    {
       path: '/stock/edit/:id',
       name: 'edit',
       component: edit
+    },
+    {
+      path: '/pengiriman/edit/:id',
+      name: 'editPengiriman',
+      component: editPengiriman
     },
 
   ],

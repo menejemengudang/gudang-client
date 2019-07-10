@@ -5,7 +5,7 @@
       type="button"
       class="btn btn-success tombol"
       v-on:click="addProduct(true)"
-    >add Product</button>
+    >add Pengiriman</button>
     <center>
       <h3 v-if="onStage==false" class="judul">you must login first</h3>
     </center>
@@ -13,18 +13,23 @@
       <thead>
         <tr>
           <th>NO.</th>
-          <th>Penyedia Benih</th>
-          <th>Perusahaan</th>
-          <th>Kelompok Tani</th>
-          <th>Volume</th>
-          <th>Tgl Penanaman</th>
-          <th>Tgl Panen</th>
-          <th>Lokasi Penanaman</th>
-          <th>Surat Jalan</th>
-          <th>Kelayakan</th>
-          <th>Kadar Air</th>
-          <th>Grade Benih</th>
-          <th>Label Sertifikasi/th></th>
+          <th>noInduk</th>
+          <th>tahunProduksi</th>
+          <th>varietas</th>
+          <th>lot</th>
+          <th>produsen</th>
+          <th>tujuan</th>
+          <th>provinsi</th>
+          <th>kabupaten</th>
+          <th>kecamatan</th>
+          <th>volume</th>
+          <th>nomorSertifikat</th>
+          <th>tanggalSertifikat</th>
+          <th>tanggalKedaluarsa</th>
+          <th>instansi</th>
+          <th>tanggalPengiriman</th>
+          <th>supir</th>
+          <th>plat</th>
           <th></th>
           <th></th>
         </tr>
@@ -32,21 +37,26 @@
       <tbody v-for=" (item,index) in dataList " v-bind:key="item._id">
         <tr>
           <td>{{index+1}}</td>
-          <td>{{item.penyedia}}</td>
-          <td>{{ item.perusahaan}}</td>
-          <td>{{ item.kelompok}}</td>
+          <td>{{item.noInduk}}</td>
+          <td>{{ item.tahunProduksi}}</td>
+          <td>{{ item.varietas}}</td>
+          <td>{{ item.lot}}</td>
+          <td>{{ item.produsen}}</td>
+          <td>{{ item.tujuan}}</td>
+          <td>{{ item.provinsi}}</td>
+          <td>{{ item.kabupaten}}</td>
+          <td>{{ item.kecamatan}}</td>
+
           <td>{{ item.volume}}</td>
-          <td>{{ item.tanggalTanam}}</td>
-          <td>{{ item.tanggalPanen}}</td>
-          <td>{{ item.lokasiPenanaman}}</td>
-          <td>{{ item.suratJalan}}</td>
-          <td>{{ item.kelayakan}}</td>
 
-          <td>{{ item.kadarAir}}</td>
+          <td>{{ item.nomorSertifikat}}</td>
 
-          <td>{{ item.gradeBenih}}</td>
-
-          <td>{{ item.labelSertifikasi}}</td>
+          <td>{{ item.tanggalSertifikat}}</td>
+          <td>{{ item.tanggalKedaluarsa}}</td>
+          <td>{{ item.instansi}}</td>
+          <td>{{ item.tanggalPengiriman}}</td>
+          <td>{{ item.supir}}</td>
+          <td>{{ item.plat}}</td>
 
           <td>
             <button type="button" class="btn btn-info" v-on:click="edit(item._id,index)">edit</button>
@@ -65,20 +75,23 @@ export default {
   data() {
     return {
       form: {
+        noInduk: "",
         tahunProduksi: "",
-        jenis: "",
+        varietas: "",
         lot: "",
         produsen: "",
+        tujuan: "",
         provinsi: "",
         kabupaten: "",
         kecamatan: "",
-        tujuan: "",
         volume: "",
-
-        label: "",
-        tanggalProduksi: "",
-        tanggalExp: "",
-        instansi: ""
+        nomorSertifikat: "",
+        tanggalSertifikat: "",
+        tanggalKedaluarsa: "",
+        instansi: "",
+        tanggalPengiriman: "",
+        supir: "",
+        plat: ""
       },
       dataList: [],
       onStage: true
@@ -88,7 +101,7 @@ export default {
   methods: {
     loadData() {
       this.$api
-        .get("http://localhost:3000" + "/product/all")
+        .get("http://localhost:3000" + "/pengiriman/all")
         .then(({ data }) => {
           this.dataList = data;
         })
@@ -103,14 +116,14 @@ export default {
         });
     },
     addProduct() {
-      this.$router.push("addProduct");
+      this.$router.push("addPengiriman");
     },
     remove(ID, index) {
       // console.log(ID);
       var result = [];
       var cek = true;
       this.$api
-        .delete("http://localhost:3000" + `/product/remove/${ID}`)
+        .delete("http://localhost:3000" + `/pengiriman/remove/${ID}`)
         .then(({ data }) => {
           for (var i = 0; i < this.dataList.length; i++) {
             if (i == index) {
@@ -120,20 +133,20 @@ export default {
               result.push(this.dataList[i]);
             }
           }
-          this.dataList = result;
+          this.dataList = result
         })
         .catch(({ response }) => {
           // console.log(response.data);
           this.$swal({
             title: `Opps!`,
-            text: `cant load data`,
+            text: `cant delete data`,
             type: "error",
             timer: 2500
           });
         });
     },
     edit(ID, index) {
-      this.$router.push({ name: "edit", params: { id: ID } });
+      this.$router.push({ name: "editPengiriman", params: { id: ID } });
     },
     verify() {
       // console.log("masio ngantok panggah tak tlateni");
@@ -156,8 +169,11 @@ export default {
 };
 </script>
 <style scoped>
+.container {
+  padding-left: 0px;
+}
 .tombol {
-  margin: 10px;
+  margin: 0px;
 
   /* padding: 50px; */
 }

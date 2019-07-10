@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <navbar/>
-    <router-view/>
+    <navbar />
+    <router-view />
   </div>
 </template>
 <script>
@@ -13,6 +13,9 @@ export default {
   },
   methods: {
     show() {}
+  },
+  mounted() {
+    this.$store.dispatch("getLogin");
   }
 };
 </script>

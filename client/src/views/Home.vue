@@ -7,13 +7,13 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="@/img/home3.jpg" class="d-block w-100" alt="...">
+        <img src="@/img/home3.jpg" class="d-block w-100" alt="..." />
       </div>
       <div class="carousel-item">
-        <img src="@/img/home2.gif" class="d-block w-100" alt="...">
+        <img src="@/img/home2.gif" class="d-block w-100" alt="..." />
       </div>
       <div class="carousel-item">
-        <img src="@/img/home1.jpg" class="d-block w-100" alt="...">
+        <img src="@/img/home1.jpg" class="d-block w-100" alt="..." />
       </div>
     </div>
     <a
@@ -66,6 +66,7 @@ export default {
   mounted() {
     console.log("balik");
     this.slide = true;
+    // location.reload();
 
     // this.showSlide();
     // this.$store.state.allUserData = true;

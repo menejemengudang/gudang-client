@@ -8,17 +8,19 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item :to="{name:'Stock'}">stock</b-nav-item>
-          <b-nav-item right>pengiriman</b-nav-item>
+          <b-nav-item :to="{name:'pengiriman'}" right>pengiriman</b-nav-item>
           <!-- <b-nav-item  disabled>Disabled</b-nav-item> -->
         </b-navbar-nav>
         <!-- <router-link :to="{name:about}">/usesdsds</router-link> -->
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item right :to="{name:'Register'}">Register</b-nav-item>
-          <b-nav-item right :to="{name:'Login'}" v-if="isLogin">Login</b-nav-item>
+          <b-nav-item right :to="{name:'Register'}" v-on:click="tes()" v-if="tes()==false">Register</b-nav-item>
+          <b-nav-item right :to="{name:'Login'}" v-on:click="tes()" v-if="tes()==false">Login</b-nav-item>
+          <b-nav-item right v-on:click="logout()" v-if="tes()==true">Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    {{tes()}}
     <!-- <router-view></router-view> -->
   </div>
 </template>
@@ -34,15 +36,30 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setRegisterType", "setLoginType"])
+    // ...mapMutations(["setRegisterType", "setLoginType"]),
     //   var payload = this.$route.params.type;
     // this.setRegisterType(payload);
-  },
-  mounted() {
-    var token = localStorage.getItem("tg");
-    if (token !== null) {
-      this.isLogin = false;
+    tes() {
+      var token = localStorage.getItem("tg");
+      if (!token) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+    logout() {
+      console.log("keluar dong");
+      localStorage.removeItem("tg");
+      localStorage.removeItem("rg");
+      this.tes();
+      location.reload();
+    },
+    cekLogin() {
+      var token = localStorage.getItem("tg");
+      console.log(token, "xcxc");
     }
-  }
+  },
+
+  mounted() {}
 };
 </script>

@@ -51,7 +51,7 @@ export default {
           // console.log(data);
           localStorage.setItem("tg", data.token);
           localStorage.setItem("rg", data.role);
-
+          this.$store.dispatch("getLogin");
           this.$router.push("/");
           this.onReset();
         })

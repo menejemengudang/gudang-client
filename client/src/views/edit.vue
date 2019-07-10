@@ -1,80 +1,80 @@
  <template>
   <div class="form">
     <!-- =================================================== -->
-    <!-- =================================================== -->
-    <b-form-group label="No induk">
-      <b-form-input v-model="form.noInduk" required placeholder="Enter Email"></b-form-input>
+    <b-form-group label="Penyedia">
+      <b-form-input v-model="form.penyedia" required placeholder="Enter Email"></b-form-input>
     </b-form-group>
-    <b-form-group label="tahun Produksi">
-      <b-form-input v-model="form.tahunProduksi" required placeholder="Enter Email"></b-form-input>
+    <!-- =================================================== -->
+    <!-- =================================================== -->
+    <b-form-group label="Perusahaan">
+      <b-form-input v-model="form.perusahaan" required placeholder="Enter Email"></b-form-input>
+    </b-form-group>
+    <b-form-group label="kelompok">
+      <b-form-input v-model="form.kelompok" required placeholder="Enter Email"></b-form-input>
     </b-form-group>
     <!-- ================================================= -->
 
-    <b-form-group label="jenis">
-      <b-form-input v-model="form.jenis" required placeholder="Enter Email"></b-form-input>
-    </b-form-group>
-    <!-- ================================================= -->
-    <!-- =================================================== -->
-    <b-form-group label="Lot">
-      <b-form-input v-model="form.lot" required placeholder="Enter Email"></b-form-input>
-    </b-form-group>
-    <!-- ================================================= -->
-
-    <!-- =================================================== -->
-    <b-form-group label="Produsen">
-      <b-form-input v-model="form.produsen" required placeholder="Enter Email"></b-form-input>
-    </b-form-group>
-    <!-- ================================================= -->
-    <!-- =================================================== -->
-    <b-form-group label="alamat">
-      <b-form-input v-model="form.alamatProdusen" required placeholder="Enter Email"></b-form-input>
-    </b-form-group>
-    <!-- ================================================= -->
-    <!-- =================================================== -->
-
-    <b-form-group label="Tujuan">
-      <b-form-input v-model="form.tujuan" required placeholder="Enter Email"></b-form-input>
-    </b-form-group>
-    <b-form-group label="alamat">
-      <b-form-input v-model="form.alamatTujuan" required placeholder="Enter Email"></b-form-input>
-    </b-form-group>
-    <!-- ================================================= -->
-    <!-- =================================================== -->
-    <b-form-group label="Volume">
+    <b-form-group label="volume">
       <b-form-input v-model="form.volume" required placeholder="Enter Email"></b-form-input>
     </b-form-group>
     <!-- ================================================= -->
     <!-- =================================================== -->
-    <b-form-group label="Label">
-      <b-form-input v-model="form.label" required placeholder="Enter Email"></b-form-input>
-    </b-form-group>
-    <!-- ================================================= -->
-    <!-- =================================================== -->
-    <b-form-group label="Tanggal Produksi/Label">
+    <b-form-group label="tanggal tanam">
       <input
         class="form-control"
         type="date"
         id="example-date-input"
-        v-model="form.tanggalProduksi"
+        v-model="form.tanggalTanam"
         required
-      >
+      />
     </b-form-group>
     <!-- ================================================= -->
+
     <!-- =================================================== -->
-    <b-form-group label="Tanggal Kedaluarsa">
+    <b-form-group label="tanggal panen">
       <input
         class="form-control"
         type="date"
         id="example-date-input"
-        v-model="form.tanggalExp"
+        v-model="form.tanggalPanen"
         required
-      >
+      />
     </b-form-group>
     <!-- ================================================= -->
     <!-- =================================================== -->
-    <b-form-group label="Instansi yang mengeluarkan">
-      <b-form-input v-model="form.instansi" required placeholder="Enter Email"></b-form-input>
+    <b-form-group label="lokasiPenanaman">
+      <b-form-input v-model="form.lokasiPenanaman" required placeholder="Enter Email"></b-form-input>
     </b-form-group>
+    <!-- ================================================= -->
+    <!-- =================================================== -->
+
+    <b-form-group label="suratJalan">
+      <b-form-input v-model="form.suratJalan" required placeholder="Enter Email"></b-form-input>
+    </b-form-group>
+    <b-form-group label="kelayakan">
+      <b-form-input v-model="form.kelayakan" required placeholder="Enter Email"></b-form-input>
+    </b-form-group>
+    <!-- ================================================= -->
+    <!-- =================================================== -->
+    <b-form-group label="kadarAir">
+      <b-form-input v-model="form.kadarAir" required placeholder="Enter Email"></b-form-input>
+    </b-form-group>
+    <!-- ================================================= -->
+    <!-- =================================================== -->
+    <b-form-group label="gradeBenih">
+      <b-form-input v-model="form.gradeBenih" required placeholder="Enter Email"></b-form-input>
+    </b-form-group>
+    <!-- ================================================= -->
+    <!-- =================================================== -->
+
+    <!-- ================================================= -->
+    <!-- =================================================== -->
+    <b-form-group label="labelSertifikasi">
+      <b-form-input v-model="form.labelSertifikasi" required placeholder="Enter Email"></b-form-input>
+    </b-form-group>
+    <!-- ================================================= -->
+    <!-- =================================================== -->
+
     <button type="button" class="btn btn-warning" v-on:click="save( )">save</button>
   </div>
 </template>
@@ -83,20 +83,18 @@ export default {
   data() {
     return {
       form: {
-        noInduk: "",
-        tahunProduksi: "",
-        jenis: "",
-        lot: "",
-        produsen: "",
-        alamatTujuan: "",
-        alamatProdusen: "",
-        tujuan: "",
+        penyedia: "",
+        perusahaan: "",
+        kelompok: "",
         volume: "",
-
-        label: "",
-        tanggalProduksi: "",
-        tanggalExp: "",
-        instansi: ""
+        tanggalTanam: "",
+        tanggalPanen: "",
+        lokasiPenanaman: "",
+        suratJalan: "",
+        kelayakan: "",
+        kadarAir: "",
+        gradeBenih: "",
+        labelSertifikasi: ""
       }
     };
   },
@@ -109,20 +107,7 @@ export default {
       this.$api
         .get("http://localhost:3000" + `/product/edit/${id}`)
         .then(({ data }) => {
-          console.log(data[0]);
-          this.form.noInduk = data[0].noInduk;
-          this.form.tahunProduksi = data[0].tahunProduksi;
-          this.form.jenis = data[0].jenis;
-          this.form.lot = data[0].lot;
-          this.form.tujuan = data[0].tujuan;
-          this.form.produsen = data[0].produsen;
-          this.form.alamatTujuan = data[0].alamatTujuan;
-          this.form.alamatProdusen = data[0].alamatProdusen;
-          this.form.volume = data[0].volume;
-          this.form.label = data[0].label;
-          this.form.tanggalProduksi = data[0].tanggalProduksi;
-          this.form.tanggalExp = data[0].tanggalExp;
-          this.form.instansi = data[0].instansi;
+          this.form = data[0];
         })
         .catch(({ response }) => {
           this.$swal({
